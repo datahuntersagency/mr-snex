@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mr Snex — Coming Soon</title>
+<meta name="description" content="Mr Snex is coming soon: snack boxes of burgers, hot dogs and more, served from gas stations across SoCal and our first shop in Burbank, CA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#E25C00; --orange-2:#EE7A1F; --orange-deep:#C5480A;
+    --yellow:#FFC94A; --cream:#FBEFCF; --cream-2:#F6E2B1;
+    --brown:#4A1F06; --brown-2:#2E1203;
+    --display:'Anton', Impact, 'Arial Narrow', sans-serif;
+    --body:'DM Sans', system-ui, -apple-system, Segoe UI, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--brown);background:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  .wrap{width:min(1180px,92vw);margin:0 auto}
+  .display{font-family:var(--display);text-transform:uppercase;letter-spacing:.01em;line-height:.9;font-weight:400}
+
+  /* checker helpers */
+  .checker{
+    --c1:var(--orange-2); --c2:var(--cream); --s:56px;
+    background-color:var(--c2);
+    background-image:
+      conic-gradient(var(--c1) 25%, transparent 0 50%, var(--c1) 0 75%, transparent 0);
+    background-size:var(--s) var(--s);
+  }
+
+  /* ticker */
+  .ticker{background:var(--brown);color:var(--yellow);overflow:hidden;white-space:nowrap;border-bottom:4px solid var(--yellow)}
+  .ticker__track{display:inline-flex;gap:2.2rem;padding:.7rem 0;animation:tick 28s linear infinite;font-family:var(--display);font-size:1.05rem;letter-spacing:.08em}
+  .ticker__track span{display:inline-flex;align-items:center;gap:2.2rem}
+  .ticker__track span::after{content:"★";color:var(--orange-2)}
+  @keyframes tick{to{transform:translateX(-50%)}}
+
+  /* hero */
+  .hero{position:relative;background:var(--orange);color:var(--cream);overflow:hidden;isolation:isolate}
+  .hero::before{ /* checker floor */
+    content:"";position:absolute;inset:auto 0 0 0;height:22%;z-index:-1;
+    background-color:var(--cream);
+    background-image:conic-gradient(var(--orange-2) 25%, transparent 0 50%, var(--orange-2) 0 75%, transparent 0);
+    background-size:64px 64px;
+    transform:perspective(600px) rotateX(55deg);transform-origin:bottom;opacity:.95;
+  }
+  .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:22%;z-index:-1;background:linear-gradient(var(--orange) 0%, transparent 45%)}
+  .hero__inner{display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center;padding:3.2rem 0 9rem}
+  .hero__logo{width:min(440px,80%);filter:drop-shadow(0 6px 0 rgba(74,31,6,.35))}
+  .badge{display:inline-flex;align-items:center;gap:.55rem;background:var(--yellow);color:var(--brown);font-weight:800;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem .95rem;border-radius:99px;border:3px solid var(--brown);box-shadow:3px 3px 0 var(--brown);margin:1.6rem 0 1.1rem}
+  .badge i{width:9px;height:9px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 0 rgba(226,92,0,.7);animation:pulse 1.6s infinite}
+  @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(226,92,0,0)}100%{box-shadow:0 0 0 0 rgba(226,92,0,0)}}
+  .hero h1{font-size:clamp(4rem,10.5vw,8.6rem);color:var(--yellow);text-shadow:5px 5px 0 var(--brown);-webkit-text-stroke:2px var(--brown)}
+  .hero h1 em{font-style:normal;color:var(--cream);display:block}
+  .hero__lede{font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.55;max-width:34rem;margin:1.4rem 0 1.8rem;color:#FFF3DC}
+  .hero__lede b{color:var(--yellow)}
+
+  .signup{display:flex;gap:.6rem;max-width:32rem;background:var(--cream);padding:.45rem;border-radius:16px;border:3px solid var(--brown);box-shadow:6px 6px 0 var(--brown)}
+  .signup input{flex:1;min-width:0;border:0;background:transparent;font:500 1rem var(--body);color:var(--brown);padding:.7rem .8rem;outline:none}
+  .signup input::placeholder{color:#9b6a45}
+  .btn{font-family:var(--display);font-size:1.15rem;letter-spacing:.05em;text-transform:uppercase;background:var(--brown);color:var(--yellow);border:0;border-radius:11px;padding:.8rem 1.25rem;cursor:pointer;transition:transform .15s, background .15s;white-space:nowrap}
+  .btn:hover{background:var(--orange-deep);transform:translateY(-2px)}
+  .signup__note{font-size:.85rem;margin-top:.9rem;color:#FFE6C2;min-height:1.3em}
+  .signup__note.ok{color:var(--yellow);font-weight:700}
+
+  .hero__art{position:relative;display:grid;place-items:center;min-height:520px}
+  .boxcard{position:relative;width:min(330px,70%);aspect-ratio:620/960;border-radius:28px;overflow:hidden;border:4px solid var(--brown);box-shadow:12px 12px 0 var(--brown);transform:rotate(5deg);background:var(--cream-2)}
+  .boxcard img{width:100%;height:100%;object-fit:cover}
+  .hero__mascot{position:absolute;left:-2%;bottom:-4%;width:min(250px,46%);animation:bob 2.4s ease-in-out infinite;filter:drop-shadow(0 10px 0 rgba(74,31,6,.25))}
+  @keyframes bob{50%{transform:translateY(-14px) rotate(-3deg)}}
+  .sticker{position:absolute;right:2%;top:4%;width:130px;height:130px;border-radius:50%;background:var(--yellow);border:4px solid var(--brown);display:grid;place-items:center;text-align:center;font-family:var(--display);color:var(--orange-deep);font-size:1.75rem;line-height:.9;transform:rotate(12deg);box-shadow:5px 5px 0 var(--brown);animation:spin 14s linear infinite}
+  .sticker small{display:block;font-size:.8rem;color:var(--brown);letter-spacing:.1em}
+  @keyframes spin{50%{transform:rotate(-6deg) scale(1.05)}}
+
+  /* sections */
+  section{position:relative}
+  .eyebrow{font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:.8rem;color:var(--orange-deep);margin-bottom:.8rem}
+  .h2{font-size:clamp(2.8rem,6.2vw,5.2rem);color:var(--brown)}
+  .h2 span{color:var(--orange)}
+  .sub{font-size:1.1rem;line-height:1.6;max-width:40rem;margin-top:1rem;color:#6b3a19}
+
+  .strip{height:28px;--s:28px}
+
+  /* boxes */
+  .boxes{padding:6rem 0 5rem;background:var(--cream)}
+  .boxes__head{display:flex;justify-content:space-between;align-items:end;gap:2rem;flex-wrap:wrap}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3rem}
+  .card{background:#fff8e6;border:3px solid var(--brown);border-radius:24px;overflow:hidden;box-shadow:7px 7px 0 var(--brown);transition:transform .2s, box-shadow .2s}
+  .card:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 var(--brown)}
+  .card__img{aspect-ratio:4/3;overflow:hidden;background:var(--yellow)}
+  .card__img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .card:hover .card__img img{transform:scale(1.06)}
+  .card__body{padding:1.3rem 1.4rem 1.5rem}
+  .card h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:2rem;line-height:1;color:var(--orange-deep)}
+  .card p{margin-top:.5rem;line-height:1.5;color:#6b3a19}
+  .card--soon .card__img{display:grid;place-items:center;background:var(--orange)}
+  .card--soon .card__img img{width:56%;height:auto;object-fit:contain}
+  .card--soon:hover .card__img img{transform:rotate(-6deg) scale(1.05)}
+
+  /* where */
+  .where{background:var(--brown);color:var(--cream);padding:6rem 0;overflow:hidden}
+  .where .h2{color:var(--cream)} .where .h2 span{color:var(--yellow)}
+  .where .eyebrow{color:var(--yellow)}
+  .where .sub{color:#f1d9b4}
+  .spots{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-top:3rem}
+  .spot{border-radius:26px;padding:2rem;border:3px solid var(--yellow);position:relative;overflow:hidden;min-height:290px;display:flex;flex-direction:column;justify-content:space-between}
+  .spot--a{background:var(--orange)}
+  .spot--b{background:var(--cream);color:var(--brown)}
+  .spot .num{font-family:var(--display);font-size:1rem;letter-spacing:.14em;opacity:.85}
+  .spot h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(2.2rem,4vw,3.3rem);line-height:.95;margin:.6rem 0}
+  .spot p{line-height:1.55;max-width:26rem}
+  .spot .pin{display:inline-flex;gap:.5rem;align-items:center;font-weight:800;margin-top:1.4rem;background:var(--brown);color:var(--yellow);padding:.55rem .95rem;border-radius:99px;font-size:.9rem;align-self:flex-start}
+  .spot--a .pin{background:var(--cream);color:var(--orange-deep)}
+  .spot__icon{position:absolute;right:-10px;bottom:-14px;width:180px;opacity:.95}
+
+  /* trailer */
+  .trailer{background:var(--yellow);padding:6rem 0 4.5rem;overflow:hidden}
+  .trailer__grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:2.5rem;align-items:center}
+  .trailer__svg{width:100%;height:auto;filter:drop-shadow(10px 12px 0 rgba(74,31,6,.18))}
+  .road{height:46px;margin-top:-6px;background:repeating-linear-gradient(90deg,var(--brown) 0 60px,transparent 60px 100px) center/100% 6px no-repeat, var(--brown-2)}
+  .rolling{animation:roll 6s ease-in-out infinite alternate}
+  @keyframes roll{from{transform:translateX(-2%)}to{transform:translateX(2%)}}
+
+  /* fleet */
+  .fleet{background:var(--cream);padding:6rem 0 5rem}
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:1.1rem;margin-top:3rem}
+  .gallery figure{border-radius:20px;overflow:hidden;border:3px solid var(--brown);background:#ddd;position:relative}
+  .gallery img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .gallery figure:hover img{transform:scale(1.05)}
+  .g-wide{grid-column:span 2}
+  .g-tall{grid-row:span 2}
+  .gallery figcaption{position:absolute;left:.7rem;bottom:.7rem;background:var(--brown);color:var(--yellow);font-weight:800;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .65rem;border-radius:99px}
+
+  /* final */
+  .final{background:var(--orange);color:var(--cream);text-align:center;padding:6rem 0 5rem;overflow:hidden;position:relative}
+  .final .bigbite{font-size:clamp(5rem,17vw,14rem);color:var(--yellow);-webkit-text-stroke:3px var(--brown);text-shadow:7px 7px 0 var(--brown)}
+  .final p{font-size:1.2rem;max-width:36rem;margin:1.2rem auto 2rem;line-height:1.55;color:#FFF3DC}
+  .final .signup{margin:0 auto}
+  .final__mascot{width:170px;margin:0 auto -1rem;animation:bob 2.2s ease-in-out infinite}
+  footer{background:var(--brown-2);color:#e9cfa6;padding:2rem 0;font-size:.9rem}
+  footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
+  footer img{height:42px;width:auto}
+
+  /* reveal */
+  .js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease}
+  .js .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:900px){
+    .hero__inner,.trailer__grid{grid-template-columns:1fr}
+    .hero__inner{padding:2.2rem 0 7rem;text-align:left}
+    .hero__art{min-height:440px;order:2}
+    .cards{grid-template-columns:1fr}
+    .spots{grid-template-columns:1fr}
+    .spot__icon{width:120px}
+    .spot--b p,.spot--b h3{position:relative;z-index:1}
+    .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}
+    .g-wide{grid-column:span 2}
+  }
+  @media (max-width:520px){
+    .signup{flex-direction:column}
+    .btn{width:100%}
+    .sticker{width:100px;height:100px;font-size:1.35rem}
+    .gallery{grid-auto-rows:140px}
+    .spot__icon{width:92px;right:-6px;bottom:-8px}
+    .spot--b p{max-width:78%}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span>Coming soon</span><span>Bite me!</span><span>Fast · Fresh · Fun</span><span>Gas stations across SoCal</span><span>Burbank, CA</span><span>Snack boxes</span>
+    <span>Coming soon</span><span>Bite me!</span><span>Fast · Fresh · Fun</span><span>Gas stations across SoCal</span><span>Burbank, CA</span><span>Snack boxes</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap hero__inner">
+    <div class="reveal">
+      <img class="hero__logo" src="img/logo.png" alt="Mr Snex">
+      <div class="badge"><i></i> Now loading · SoCal</div>
+      <h1 class="display">Coming<em>Soon!</em></h1>
+      <p class="hero__lede">Little boxes. <b>Big bites.</b> Burgers, hot dogs and more, packed into grab-and-go snack boxes and rolling into <b>gas stations across Southern California</b>, plus our first shop in <b>Burbank, CA</b>.</p>
+      <form class="signup" data-signup>
+        <label for="email1" class="sr" style="position:absolute;left:-9999px">Email</label>
+        <input id="email1" type="email" name="email" placeholder="Your email for first bites" required>
+        <button class="btn" type="submit">Notify me</button>
+      </form>
+      <p class="signup__note" aria-live="polite">Be first in line for opening day and free-snack drops.</p>
+    </div>
+    <div class="hero__art reveal">
+      <div class="boxcard"><img src="img/box.jpg" alt="Mr Snex hot dog snack box with the Bite Me! slogan and checkered pattern"></div>
+      <img class="hero__mascot" src="img/mascot.png" alt="">
+      <div class="sticker"><div>Bite<br>me!<small>Est. 2026</small></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="checker strip" aria-hidden="true"></div>
+
+<section class="boxes" id="menu">
+  <div class="wrap">
+    <div class="boxes__head reveal">
+      <div>
+        <p class="eyebrow">What's in the box</p>
+        <h2 class="h2 display">Snack-size.<br><span>Full-size flavor.</span></h2>
+      </div>
+      <p class="sub">Every Mr Snex box is built to grab at the pump and eat on the go. No trays, no waiting around: just open here and bite.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <div class="card__img"><img src="img/dogs.jpg" alt="Three hot dogs with ketchup and mustard"></div>
+        <div class="card__body"><h3>Hot dog boxes</h3><p>Snappy dogs in our signature pillow box. Look for the "Open Here" tab.</p></div>
+      </article>
+      <article class="card reveal">
+        <div class="card__img"><img src="img/meal.jpg" alt="Hot dogs, a Mr Snex bag and a Drink Up cup on a checkered table"></div>
+        <div class="card__body"><h3>Combos to go</h3><p>Bag it up with a drink and sauces. Built for one hand, made for the road.</p></div>
+      </article>
+      <article class="card card--soon reveal">
+        <div class="card__img"><img src="img/mascot.png" alt=""></div>
+        <div class="card__body"><h3>Burgers &amp; more</h3><p>Mini burger boxes and more hit the menu at launch. Sign up and you'll see it first.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="where" id="where">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">Where to find us</p>
+      <h2 class="h2 display">Two ways<br>to get your <span>Snex.</span></h2>
+    </div>
+    <div class="spots">
+      <div class="spot spot--a reveal">
+        <div>
+          <span class="num">01 · Mobile</span>
+          <h3>Gas stations<br>across SoCal</h3>
+          <p>Our checkered trucks pull up where you fuel up. Gas, snacks, gone.</p>
+        </div>
+        <span class="pin">⛽ Locations announced soon</span>
+      </div>
+      <div class="spot spot--b reveal">
+        <div>
+          <span class="num">02 · Brick &amp; mortar</span>
+          <h3>Burbank, CA</h3>
+          <p>Our first home base: a little shop full of big bites. Opening date coming soon.</p>
+        </div>
+        <span class="pin">📍 Burbank, California</span>
+        <img class="spot__icon" src="img/mascot.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trailer" id="truck">
+  <div class="wrap trailer__grid">
+    <div class="reveal">
+      <p class="eyebrow">Meet the Snex Mobile</p>
+      <h2 class="h2 display">Now<br>rolling <span>out.</span></h2>
+      <p class="sub">Fully wrapped in checkers and ready to serve. Keep an eye out at your local station: when you see this guy, pull over.</p>
+    </div>
+    <div class="reveal">
+      <div class="rolling">
+      <svg class="trailer__svg" viewBox="0 0 900 430" role="img" aria-label="Mr Snex food truck with orange and cream checkered wrap, serving window and logo">
+        <defs>
+          <pattern id="chk" width="70" height="70" patternUnits="userSpaceOnUse" patternTransform="translate(10 6)">
+            <rect width="70" height="70" fill="#F7E2B2"/>
+            <rect width="35" height="35" fill="#E8661C"/>
+            <rect x="35" y="35" width="35" height="35" fill="#E8661C"/>
+          </pattern>
+          <pattern id="awn" width="44" height="10" patternUnits="userSpaceOnUse">
+            <rect width="22" height="10" fill="#E25C00"/><rect x="22" width="22" height="10" fill="#FBEFCF"/>
+          </pattern>
+          <clipPath id="bodyClip">
+            <path d="M60 330 V140 Q60 72 128 66 L790 58 Q842 58 842 108 V330 Z"/>
+          </clipPath>
+          <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#5b4a3e"/><stop offset="1" stop-color="#20140d"/>
+          </linearGradient>
+          <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+
+        <ellipse cx="450" cy="392" rx="380" ry="16" fill="#4A1F06" opacity=".18"/>
+
+        <!-- body -->
+        <g clip-path="url(#bodyClip)">
+          <rect x="0" y="0" width="900" height="400" fill="#E25C00"/>
+          <!-- checker wrap with wave boundary, like the vans -->
+          <path d="M330 0 C300 90 400 140 360 220 C330 290 380 320 360 400 H900 V0 Z" fill="url(#chk)"/>
+          <path d="M330 0 C300 90 400 140 360 220 C330 290 380 320 360 400" fill="none" stroke="#F7E2B2" stroke-width="14"/>
+          <!-- body shading -->
+          <rect x="0" y="0" width="900" height="120" fill="url(#shine)"/>
+          <rect x="0" y="292" width="900" height="40" fill="#4A1F06" opacity=".12"/>
+        </g>
+        <path d="M60 330 V140 Q60 72 128 66 L790 58 Q842 58 842 108 V330 Z" fill="none" stroke="#4A1F06" stroke-width="6"/>
+
+        <!-- roof cap -->
+        <path d="M150 66 Q160 40 200 38 L760 34 Q800 34 806 58" fill="#FBEFCF" stroke="#4A1F06" stroke-width="6" stroke-linejoin="round"/>
+
+        <!-- windshield / cab window -->
+        <path d="M70 150 Q72 96 122 92 L176 90 Q190 90 190 104 V196 Q190 208 178 208 H82 Q70 208 70 196 Z" fill="url(#glass)" stroke="#4A1F06" stroke-width="6"/>
+        <path d="M92 106 L132 104 L96 170 Z" fill="#fff" opacity=".22"/>
+        <!-- cab door -->
+        <rect x="200" y="98" width="110" height="214" rx="10" fill="none" stroke="#4A1F06" stroke-width="4" opacity=".55"/>
+        <rect x="278" y="200" width="22" height="8" rx="4" fill="#4A1F06"/>
+
+        <!-- logo on solid orange -->
+        <image href="img/logo.png" x="76" y="214" width="250" height="120" preserveAspectRatio="xMidYMid meet"/>
+
+        <!-- serving window -->
+        <rect x="420" y="112" width="330" height="140" rx="12" fill="#2E1203" stroke="#4A1F06" stroke-width="6"/>
+        <rect x="430" y="122" width="310" height="120" rx="8" fill="url(#glass)"/>
+        <image href="img/mascot.png" x="610" y="128" width="104" height="132" preserveAspectRatio="xMidYMax meet"/>
+        <path d="M440 132 L520 132 L452 230 Z" fill="#fff" opacity=".12"/>
+        <!-- menu board inside -->
+        <rect x="450" y="140" width="120" height="70" rx="6" fill="#FFC94A" stroke="#4A1F06" stroke-width="3"/>
+        <text x="510" y="168" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="20" fill="#C5480A">BITE ME!</text>
+        <text x="510" y="194" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="800" font-size="11" fill="#4A1F06" letter-spacing="1">BURGERS · DOGS</text>
+        <!-- awning -->
+        <path d="M404 96 H766 L748 128 H422 Z" fill="url(#awn)" stroke="#4A1F06" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M422 128 q13 16 26 0 q13 16 26 0 q13 16 26 0 q13 16 26 0 q13 16 26 0 q13 16 26 0 q13 16 26 0 q13 16 26 0 q13 16 26 0 q13 16 26 0 q13 16 26 0 q13 16 26 0 q13 16 26 0" fill="#FBEFCF" stroke="#4A1F06" stroke-width="4" stroke-linejoin="round"/>
+        <!-- counter -->
+        <rect x="408" y="252" width="354" height="18" rx="5" fill="#4A1F06"/>
+        <rect x="414" y="270" width="342" height="5" fill="#2E1203" opacity=".4"/>
+
+        <!-- skirt -->
+        <path d="M60 318 H842 V346 Q842 352 836 352 H66 Q60 352 60 346 Z" fill="#2E1203"/>
+        <rect x="70" y="326" width="760" height="6" fill="#F7E2B2" opacity=".85"/>
+        <!-- lights -->
+        <rect x="826" y="250" width="14" height="44" rx="5" fill="#d8231c" stroke="#4A1F06" stroke-width="3"/>
+        <rect x="58" y="248" width="14" height="30" rx="5" fill="#FFE6A0" stroke="#4A1F06" stroke-width="3"/>
+
+        <!-- wheels -->
+        <g>
+          <circle cx="190" cy="352" r="44" fill="#2E1203"/><circle cx="190" cy="352" r="38" fill="#1a0b03"/>
+          <circle cx="190" cy="352" r="19" fill="#cfc6bb" stroke="#4A1F06" stroke-width="4"/><circle cx="190" cy="352" r="6" fill="#4A1F06"/>
+          <circle cx="700" cy="352" r="44" fill="#2E1203"/><circle cx="700" cy="352" r="38" fill="#1a0b03"/>
+          <circle cx="700" cy="352" r="19" fill="#cfc6bb" stroke="#4A1F06" stroke-width="4"/><circle cx="700" cy="352" r="6" fill="#4A1F06"/>
+        </g>
+      </svg>
+      </div>
+      <div class="road"></div>
+    </div>
+  </div>
+</section>
+
+<section class="fleet" id="fleet">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">Sneak peek</p>
+      <h2 class="h2 display">The fleet &amp; <span>the fit.</span></h2>
+      <p class="sub">Checkers on the vans, checkers on the uniforms, checkers on the wrap. You'll spot us from the freeway.</p>
+    </div>
+    <div class="gallery">
+      <figure class="g-wide g-tall reveal"><img src="img/van.jpg" alt="Mr Snex cargo van in orange and cream checkered wrap"><figcaption>The Snex van</figcaption></figure>
+      <figure class="reveal"><img src="img/uniform.jpg" alt="Mr Snex team uniform polo with checkered back"><figcaption>Crew fit</figcaption></figure>
+      <figure class="reveal"><img src="img/stickers.jpg" alt="Mr Snex sticker sheet"><figcaption>Stickers</figcaption></figure>
+      <figure class="reveal"><img src="img/sauce.jpg" alt="Mr Snex ketchup, cheese and ranch sauce packets"><figcaption>Sauce game</figcaption></figure>
+      <figure class="reveal"><img src="img/paper.jpg" alt="Mr Snex branded wrapping paper"><figcaption>Wraps</figcaption></figure>
+      <figure class="g-wide reveal"><img src="img/minivan.jpg" alt="Mr Snex minivan with checkered wrap"><figcaption>Snex runner</figcaption></figure>
+      <figure class="g-wide reveal"><img src="img/van-rear.jpg" alt="Rear of the Mr Snex van with logo on the back doors"><figcaption>See you at the pump</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap reveal">
+    <img class="final__mascot" src="img/mascot.png" alt="">
+    <h2 class="display bigbite">Bite me!</h2>
+    <p>Opening soon in Burbank and at gas stations across SoCal. Drop your email and we'll tell you the second the grill's hot.</p>
+    <form class="signup" data-signup>
+      <label for="email2" style="position:absolute;left:-9999px">Email</label>
+      <input id="email2" type="email" name="email" placeholder="you@email.com" required>
+      <button class="btn" type="submit">I'm hungry</button>
+    </form>
+    <p class="signup__note" aria-live="polite"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="img/logo.png" alt="Mr Snex">
+    <span>© 2026 Mr Snex · Burbank, CA · Fast. Fresh. Fun.</span>
+    <span>Site by <a href="https://datahuntersagency.com">Data Hunters</a></span>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+  // Reveal on scroll
+  const io = 'IntersectionObserver' in window ? new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12}) : null;
+  document.querySelectorAll('.reveal').forEach(el=> io ? io.observe(el) : el.classList.add('in'));
+
+  // Waitlist forms. TODO before launch: connect to a form backend (Formspree, Mailchimp, Klaviyo, etc.)
+  document.querySelectorAll('[data-signup]').forEach(form=>{
+    form.addEventListener('submit', ev=>{
+      ev.preventDefault();
+      const note = form.nextElementSibling;
+      const email = form.querySelector('input').value.trim();
+      note.textContent = "You're on the list! We'll holler when the grill's hot. 🌭";
+      note.classList.add('ok');
+      form.querySelector('button').textContent = 'Got it!';
+      form.querySelector('input').value = '';
+    });
+  });
+</script>
+</body>
+</html>
