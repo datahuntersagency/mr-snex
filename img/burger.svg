@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <pattern id="c" width="80" height="80" patternUnits="userSpaceOnUse">
+      <rect width="80" height="80" fill="#FBEFCF"/><rect width="40" height="40" fill="#EE7A1F"/><rect x="40" y="40" width="40" height="40" fill="#EE7A1F"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#FFE08A"/><stop offset="1" stop-color="#FFC94A"/></radialGradient>
+    <linearGradient id="bun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2A43A"/><stop offset="1" stop-color="#D9781E"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <path d="M0 470 L800 470 L800 600 L0 600 Z" fill="url(#c)"/>
+  <rect y="462" width="800" height="12" fill="#4A1F06"/>
+  <g stroke="#FFF3D0" stroke-width="10" stroke-linecap="round" opacity=".55">
+    <path d="M120 120 l-30 -30"/><path d="M95 200 h-45"/><path d="M680 120 l30 -30"/><path d="M705 200 h45"/>
+  </g>
+  <ellipse cx="400" cy="472" rx="250" ry="22" fill="#4A1F06" opacity=".25"/>
+  <g stroke="#4A1F06" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
+    <!-- bottom bun -->
+    <path d="M190 400 Q190 462 260 462 H540 Q610 462 610 400 Z" fill="url(#bun)"/>
+    <!-- patty -->
+    <path d="M168 352 Q168 318 205 318 H595 Q632 318 632 352 Q632 404 595 404 H205 Q168 404 168 352 Z" fill="#6B2F0E"/>
+    <!-- cheese -->
+    <path d="M172 312 H628 L604 336 L578 384 L552 336 L470 336 L440 372 L410 336 L300 336 L262 392 L232 336 L196 336 Z" fill="#FFC21A"/>
+    <!-- tomato -->
+    <path d="M190 292 H610 Q622 292 622 306 Q622 318 610 318 H190 Q178 318 178 306 Q178 292 190 292 Z" fill="#E2391B"/>
+    <!-- lettuce -->
+    <path d="M160 278 q20 -22 40 0 q20 -22 40 0 q20 -22 40 0 q20 -22 40 0 q20 -22 40 0 q20 -22 40 0 q20 -22 40 0 q20 -22 40 0 q20 -22 40 0 q20 -22 40 0 q20 -22 40 0 v20 q-20 16 -40 0 q-20 16 -40 0 q-20 16 -40 0 q-20 16 -40 0 q-20 16 -40 0 q-20 16 -40 0 q-20 16 -40 0 q-20 16 -40 0 q-20 16 -40 0 q-20 16 -40 0 q-20 16 -40 0 Z" fill="#7BC043"/>
+    <!-- top bun -->
+    <path d="M178 268 Q178 120 400 112 Q622 120 622 268 Q622 282 606 282 H194 Q178 282 178 268 Z" fill="url(#bun)"/>
+  </g>
+  <!-- bun shine -->
+  <path d="M250 190 Q280 150 340 140" fill="none" stroke="#FFE3A3" stroke-width="16" stroke-linecap="round" opacity=".8"/>
+  <!-- patty grill marks -->
+  <g stroke="#4A1F06" stroke-width="6" stroke-linecap="round" opacity=".55"><path d="M250 370 h50"/><path d="M380 382 h60"/><path d="M520 368 h40"/></g>
+  <!-- sesame -->
+  <g fill="#FFF3D0" stroke="#4A1F06" stroke-width="4">
+    <ellipse cx="320" cy="180" rx="13" ry="7" transform="rotate(-20 320 180)"/>
+    <ellipse cx="400" cy="152" rx="13" ry="7"/>
+    <ellipse cx="480" cy="182" rx="13" ry="7" transform="rotate(20 480 182)"/>
+    <ellipse cx="370" cy="222" rx="13" ry="7" transform="rotate(10 370 222)"/>
+    <ellipse cx="450" cy="226" rx="13" ry="7" transform="rotate(-10 450 226)"/>
+    <ellipse cx="260" cy="236" rx="13" ry="7" transform="rotate(-35 260 236)"/>
+    <ellipse cx="545" cy="236" rx="13" ry="7" transform="rotate(35 545 236)"/>
+  </g>
+  <!-- sticker -->
+  <g transform="rotate(12 680 110)">
+    <circle cx="680" cy="110" r="70" fill="#E25C00" stroke="#4A1F06" stroke-width="8"/>
+    <text x="680" y="104" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="30" fill="#FFC94A">MINI</text>
+    <text x="680" y="138" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="19" fill="#FBEFCF">BURGERS</text>
+  </g>
+</svg>
