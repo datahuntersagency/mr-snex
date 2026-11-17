@@ -194,7 +194,8 @@
       <div class="badge"><i></i> Now loading · SoCal</div>
       <h1 class="display">Coming<em>Soon!</em></h1>
       <p class="hero__lede">Little boxes. <b>Big bites.</b> Burgers, hot dogs and more, packed into grab-and-go snack boxes and rolling into <b>gas stations across Southern California</b>, plus our first shop in <b>Burbank, CA</b>.</p>
-      <form class="signup" data-signup>
+      <form class="signup" data-signup data-source="hero">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
         <label for="email1" class="sr" style="position:absolute;left:-9999px">Email</label>
         <input id="email1" type="email" name="email" placeholder="Your email for first bites" required>
         <button class="btn" type="submit">Notify me</button>
@@ -383,7 +384,8 @@
     <img class="final__mascot" src="img/mascot.png" alt="">
     <h2 class="display bigbite">Bite me!</h2>
     <p>Opening soon in Burbank and at gas stations across SoCal. Drop your email and we'll tell you the second the grill's hot.</p>
-    <form class="signup" data-signup>
+    <form class="signup" data-signup data-source="footer">
+      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
       <label for="email2" style="position:absolute;left:-9999px">Email</label>
       <input id="email2" type="email" name="email" placeholder="you@email.com" required>
       <button class="btn" type="submit">I'm hungry</button>
@@ -408,16 +410,29 @@
   },{threshold:.12}) : null;
   document.querySelectorAll('.reveal').forEach(el=> io ? io.observe(el) : el.classList.add('in'));
 
-  // Waitlist forms. TODO before launch: connect to a form backend (Formspree, Mailchimp, Klaviyo, etc.)
+  // Waitlist forms -> /api/subscribe (stored in a private Vercel Blob store)
   document.querySelectorAll('[data-signup]').forEach(form=>{
-    form.addEventListener('submit', ev=>{
+    form.addEventListener('submit', async ev=>{
       ev.preventDefault();
       const note = form.nextElementSibling;
-      const email = form.querySelector('input').value.trim();
-      note.textContent = "You're on the list! We'll holler when the grill's hot. 🌭";
-      note.classList.add('ok');
-      form.querySelector('button').textContent = 'Got it!';
-      form.querySelector('input').value = '';
+      const btn = form.querySelector('button');
+      const input = form.querySelector('input[type=email]');
+      const label = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Sending…';
+      note.classList.remove('ok');
+      try{
+        const r = await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({email:input.value, source:form.dataset.source, website:form.website.value})});
+        const data = await r.json().catch(()=>({}));
+        if(!r.ok || !data.ok) throw new Error(data.error || 'Something went wrong. Please try again.');
+        note.textContent = data.already ? "You're already on the list. We'll holler when the grill's hot! 🌭" : "You're on the list! We'll holler when the grill's hot. 🌭";
+        note.classList.add('ok');
+        btn.textContent = 'Got it!';
+        input.value = '';
+      }catch(err){
+        note.textContent = err.message || 'Something went wrong. Please try again.';
+        btn.textContent = label; btn.disabled = false;
+      }
     });
   });
 </script>

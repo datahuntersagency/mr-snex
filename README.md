@@ -5,4 +5,7 @@ Static coming-soon page for Mr Snex (snack boxes at SoCal gas stations + Burbank
 - `index.html` — the page
 - `img/` — brand assets
 
-TODO before launch: connect the email signup forms to a form backend.
+## Email signups
+- Forms POST to `/api/subscribe`, which saves each email (deduped) to the private Vercel Blob store `mr-snex-signups`.
+- Download all signups as CSV: `/api/export?key=EXPORT_KEY` (count only: add `&format=count`).
+- `EXPORT_KEY` and `BLOB_READ_WRITE_TOKEN` are set in the Vercel project's environment variables.
